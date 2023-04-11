@@ -5,7 +5,7 @@
       return {
         msg: "I also did it!",
         planetsData: [],
-        planets:["Venus", "Mars", "Earth"]
+        planets:["Venus", "Mars", "Earth", "Jupiter", "Saturn"]
       }
     },
     methods: {
@@ -44,7 +44,7 @@
 <template>
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
-    <button v-on:click="getData">Click me to print </button>
+    <button v-on:click="getData" class="btn btn-primary">Click me to print </button>
   </div>
   <div v-if="this.planetsData.length > 0">
     <PlanetTable :planets="this.planetsData"/>

@@ -10,18 +10,22 @@
 </script>
 
 <template>
-  <table>
-    <tr>
-      <th>Planet</th>
-      <th>Mass</th>
-      <th>Radius</th>
-      <th>Period</th>
-    </tr>
-    <tr v-for="planet in this.planets" :key=planet.name>
-      <td>{{ planet.name }}</td>
-      <td>{{ planet.mass }}</td>
-      <td>{{ planet.radius }}</td>
-      <td>{{ planet.period }}</td>
-    </tr>
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Planet</th>
+        <th scope="col">Mass</th>
+        <th scope="col">Radius</th>
+        <th scope="col">Period</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="planet in this.planets" :key=planet.name>
+        <th scope="row">{{ planet.name }}</th>
+        <td>{{ planet.mass }}</td>
+        <td>{{ planet.radius }}</td>
+        <td>{{ planet.period }}</td>
+      </tr>
+    </tbody>
   </table>
 </template>
