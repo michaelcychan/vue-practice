@@ -10,6 +10,7 @@
     },
     methods: {
       async getData() {
+        
         const requests = this.planets.map(planet => fetch("https://api.api-ninjas.com/v1/planets?name=" + planet, {
           headers: {
             "Content-Type": "application/json",
@@ -27,6 +28,7 @@
         const json = allRes.map(res => res.json());
         const data = await Promise.all(json)
 
+        this.planetsData = []
         data.forEach(datum => this.planetsData.push(datum[0]))
 
         console.log(this.planetsData)
