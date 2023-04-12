@@ -9,7 +9,9 @@
     data() {
       return {
         mustHaveTemp: false,
-        mass: "all"
+        mass: "all",
+        oneTarget: "all",
+        sorting: "unsort"
       }
     },
     methods: {
@@ -22,11 +24,13 @@
     },
     computed: {
       filteredPlanets() {
-        // return this.mustHaveTemp ?
-        //   this.planets.filter(planet => planet.temperature !== null) :
-        //   this.planets
-
         return this.planets.filter(planet => {
+          if (this.oneTarget == "all") {
+            return planet
+          } else {
+            return planet.name === this.oneTarget
+          }
+        }).filter(planet => {
           if (this.mustHaveTemp) {
             return planet.temperature !== null
           } else {
@@ -40,6 +44,14 @@
           } else {
             return planet
           }
+        }).sort((a,b)=> {
+          if (this.sorting === "unsort") {
+            return 0
+          } else if (this.sorting === "asec") {
+            return (a.name > b.name) ? 1 : -1
+          } else {
+            return (b.name > a.name) ? 1 : -1
+          }
         })
       }
     }
@@ -49,18 +61,37 @@
 <template>
   <h3>Grid</h3>
   <div>
-    <input type="checkbox" name="HaveTemp" id="HaveTemp" v-bind="mustHaveTemp" v-on:change="toggleMustHaveTemp" />
-    <label for="HaveTemp">Must have Temperature</label>
-  </div>
+    <!--filters selectors-->
+    <div>
+      <input type="checkbox" name="HaveTemp" id="HaveTemp" v-bind="mustHaveTemp" v-on:change="toggleMustHaveTemp" />
+      <label for="HaveTemp">Must have Temperature</label>
+    </div>
+  
+    <div>
+      <input type="radio" name="jupiter-compare" id="heavy" value="heavy" v-model="mass" />
+      <label for="heavy">Mass larger than Jupiter</label>
+      <input type="radio" name="jupiter-compare" id="light" value="light" v-model="mass" />
+      <label for="light">Mass less than Jupiter</label>
+      <input type="radio" name="jupiter-compare" id="all" value="all" v-model="mass" />
+      <label for="all">All masses</label>
+    </div>
 
-  <div>
+    <div>
+      <label for="one-planet">Select one Planet by name</label>
+      <select name="one-planet" id="one-planet" v-model="oneTarget">
+        <option value="all" selected>All Planets</option>
+        <option v-for="planet in this.planets" :value="planet.name">{{ planet.name }}</option>
+      </select>
+    </div>
 
-    <input type="radio" name="jupiter-compare" id="heavy" value="heavy" v-model="mass" />
-    <label for="heavy">Mass larger than Jupiter</label>
-    <input type="radio" name="jupiter-compare" id="light" value="light" v-model="mass" />
-    <label for="light">Mass less than Jupiter</label>
-    <input type="radio" name="jupiter-compare" id="all" value="all" v-model="mass" />
-    <label for="all">All masses</label>
+    <div>
+      <label for="sort">Sorting by name: </label>
+      <select name="sort" id="sort" v-model="sorting">
+        <option value="unsort" selected>Unsort</option>
+        <option value="asec">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+    </div>
   </div>
 
   <div class="container-lg text-center border">

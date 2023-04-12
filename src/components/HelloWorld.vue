@@ -64,11 +64,8 @@
   <h1>{{ heading }}</h1>
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
-    <button v-on:click="getData" class="btn btn-primary">Click me to print </button>
+    <button v-on:click="getData" class="btn btn-primary">Click me to get outer planets </button>
   </div>
-  <!-- <div v-if="this.planetsData.length > 0">
-    <PlanetTable :planets="this.planetsData"/>
-  </div> -->
   <div v-if="this.planetsData.length > 0">
     <PlanetGrid :planets="this.planetsData"/>
   </div>
