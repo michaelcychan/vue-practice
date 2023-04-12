@@ -10,6 +10,7 @@
 </script>
 
 <template>
+  <h3>Table</h3>
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>

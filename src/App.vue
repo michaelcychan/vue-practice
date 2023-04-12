@@ -5,7 +5,7 @@ import HelloWorld from './components/HelloWorld.vue'
 <template>
   <header>
     <div class="wrapper">
-      <HelloWorld />
+      <HelloWorld heading="Planet"/>
     </div>
   </header>
 
