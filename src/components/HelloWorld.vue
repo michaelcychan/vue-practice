@@ -11,7 +11,7 @@
     },
     data() {
       return {
-        msg: "I also did it!",
+        msg: "Solar System Planets",
         planetsData: [],
         planets:["Mercury","Venus",  "Earth","Mars", "Jupiter", "Saturn", "Neptune", "Uranus", "Pluto"],
         fetchHeader: {
@@ -23,7 +23,7 @@
     },
     methods: {
       async getData () {
-        const res = await fetch(this.apiBaseUri + '?max_mass=10&offset=100', {headers: this.fetchHeader});
+        const res = await fetch(this.apiBaseUri + '?max_mass=10&offset=25', {headers: this.fetchHeader});
         if (!res.ok) {
           throw res.statusText
         }
@@ -31,6 +31,7 @@
         const data = await res.json();
         this.planetsData = [];
         this.planetsData = [...data];
+        this.msg = "Other planets"
       },
       async getDataForArray() {
         
@@ -61,10 +62,13 @@
 </script>
 
 <template>
-  <h1>{{ heading }}</h1>
-  <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
-    <button v-on:click="getData" class="btn btn-primary">Click me to get outer planets </button>
+  <div class="container-lg greetings">
+    <h1>{{ heading }}</h1>
+    <h2 class="green">{{ msg }}</h2>
+  </div>
+  <div class="d-flex">
+    <button v-on:click="getDataForArray" class="btn btn-primary mx-auto">Solar System Planets</button>
+    <button v-on:click="getData" class="btn btn-primary mx-auto">Click me to get outer planets </button>
   </div>
   <div v-if="this.planetsData.length > 0">
     <PlanetGrid :planets="this.planetsData"/>
@@ -90,10 +94,4 @@ h3 {
   text-align: center;
 }
 
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
-}
 </style>

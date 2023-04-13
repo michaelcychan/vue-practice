@@ -59,21 +59,26 @@
 </script>
 
 <template>
-  <h3>Grid</h3>
-  <div>
+  <div class="container-lg">
     <!--filters selectors-->
     <div>
-      <input type="checkbox" name="HaveTemp" id="HaveTemp" v-bind="mustHaveTemp" v-on:change="toggleMustHaveTemp" />
-      <label for="HaveTemp">Must have Temperature</label>
+      <input type="checkbox" class="form-check-input" name="HaveTemp" id="HaveTemp" v-bind="mustHaveTemp" v-on:change="toggleMustHaveTemp" />
+      <label for="HaveTemp" class="form-check-label">Must have Temperature</label>
     </div>
   
     <div>
-      <input type="radio" name="jupiter-compare" id="heavy" value="heavy" v-model="mass" />
-      <label for="heavy">Mass larger than Jupiter</label>
-      <input type="radio" name="jupiter-compare" id="light" value="light" v-model="mass" />
-      <label for="light">Mass less than Jupiter</label>
-      <input type="radio" name="jupiter-compare" id="all" value="all" v-model="mass" />
-      <label for="all">All masses</label>
+      <div class="form-check-inline">
+        <input type="radio" class="form-check-input info" name="jupiter-compare" id="heavy" value="heavy" v-model="mass" />
+        <label for="heavy" class="form-check-label">Mass larger than Jupiter</label>
+      </div>
+      <div class="form-check-inline">
+        <input type="radio" class="form-check-input info" name="jupiter-compare" id="light" value="light" v-model="mass" />
+        <label for="light" class="form-check-label">Mass less than Jupiter</label>
+      </div>
+      <div class="form-check-inline">
+        <input type="radio" class="form-check-input info" name="jupiter-compare" id="all" value="all" v-model="mass" />
+        <label for="all" class="form-check-label">All masses</label>
+      </div>
     </div>
 
     <div>
@@ -84,9 +89,11 @@
       </select>
     </div>
 
-    <div>
-      <label for="sort">Sorting by name: </label>
-      <select name="sort" id="sort" v-model="sorting">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label for="sort">Sorting by name: </label>
+      </div>
+      <select class="custom-select" name="sort" id="sort" v-model="sorting">
         <option value="unsort" selected>Unsort</option>
         <option value="asec">Ascending</option>
         <option value="desc">Descending</option>
@@ -94,16 +101,18 @@
     </div>
   </div>
 
-  <div class="container-lg text-center border">
-    <div class="row justify-content-md-center row-cols-4">
-      <div v-for="planet in this.filteredPlanets" class="col border border-primary-subtle">
-        <div class="card" style="width: 18rem;">
+  <div class="container-xl text-center">
+    <div class="row justify-content-center gy-3">
+      <div v-for="planet in this.filteredPlanets" class="col justify-content-center col-xl-4 col-lg-6 col-sm-12">
+        <div class="card mx-auto shadow" style="width: 22rem;">
+          <h4 class="card-header"><strong class="text-warning">{{ planet.name[0] }}</strong>{{ planet.name.slice(1) }}</h4>
           <img src="https://picsum.photos/150/150" alt="" class="card-img-top">
-          <h5 class="card-title"><strong class="text-warning">{{ planet.name[0] }}</strong>{{ planet.name.slice(1) }}</h5>
+          <h5 class="card-title"><span class="text-success">I</span>nfo</h5>
           <p class="card-text">
-            Weight ratio to Jupiter : {{ planet.mass }} <br />
-            Temperature : {{ planet.temperature }} <br />
-            Distance from Earth (in light year):<br /> {{ planet.distance_light_year }}
+            <span class="text-danger">W</span>eight ratio to Jupiter : {{ planet.mass }} <br />
+            <span class="text-danger">T</span>emperature : {{ planet.temperature }} <br />
+            <span class="text-danger">D</span>istance from Earth (in light year) :<br /> {{ planet.distance_light_year }} <br />
+            <span class="text-danger">H</span>ost Start Temperature : {{ planet.host_star_temperature }}
           </p>
         </div>
       </div>
