@@ -22,7 +22,7 @@
       }
     },
     methods: {
-      async getData () {
+      async getDataOuterPlanets () {
         const res = await fetch(this.apiBaseUri + '?max_mass=10&offset=25', {headers: this.fetchHeader});
         if (!res.ok) {
           throw res.statusText
@@ -33,7 +33,7 @@
         this.planetsData = [...data];
         this.msg = "Other planets"
       },
-      async getDataForArray() {
+      async getDataSolarPlanets() {
         
         const requests = this.planets.map(planet => fetch(this.apiBaseUri + "?name=" + planet, {
           headers: this.fetchHeader
@@ -56,7 +56,7 @@
       PlanetGrid
     },
     created() {
-      this.getDataForArray()
+      this.getDataSolarPlanets()
     }
   }
 </script>
@@ -67,8 +67,8 @@
     <h2 class="text-success">{{ msg }}</h2>
   </div>
   <div class="d-flex">
-    <button v-on:click="getDataForArray" class="btn btn-primary mx-auto">Solar System Planets</button>
-    <button v-on:click="getData" class="btn btn-primary mx-auto">Click me to get outer planets </button>
+    <button v-on:click="getDataSolarPlanets" class="btn btn-primary mx-auto">Solar System Planets</button>
+    <button v-on:click="getDataOuterPlanets" class="btn btn-primary mx-auto">Outer planets </button>
   </div>
   <div v-if="this.planetsData.length > 0">
     <PlanetGrid :planets="this.planetsData"/>
