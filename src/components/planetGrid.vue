@@ -64,66 +64,75 @@
 </script>
 
 <template>
-  <div class="container-lg">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-2">
     <!--filters selectors-->
-    <div>
-      <input type="checkbox" class="form-check-input" name="HaveTemp" id="HaveTemp" v-bind="mustHaveTemp" v-on:change="toggleMustHaveTemp" />
-      <label for="HaveTemp" class="form-check-label">Must have Temperature</label>
-    </div>
-  
-    <div>
-      <div class="form-check-inline">
-        <input type="radio" class="form-check-input info" name="jupiter-compare" id="heavy" value="heavy" v-model="mass" />
-        <label for="heavy" class="form-check-label">Mass larger than Jupiter</label>
-      </div>
-      <div class="form-check-inline">
-        <input type="radio" class="form-check-input info" name="jupiter-compare" id="light" value="light" v-model="mass" />
-        <label for="light" class="form-check-label">Mass less than Jupiter</label>
-      </div>
-      <div class="form-check-inline">
-        <input type="radio" class="form-check-input info" name="jupiter-compare" id="all" value="all" v-model="mass" />
-        <label for="all" class="form-check-label">All masses</label>
-      </div>
-    </div>
+        <div>
+          <input type="checkbox" class="form-check-input" name="HaveTemp" id="HaveTemp" v-bind="mustHaveTemp" v-on:change="toggleMustHaveTemp" />
+          <label for="HaveTemp" class="form-check-label">Must have Temperature</label>
+        </div>
+      
+        <div>
+          <div class="form-check">
+            <input type="radio" class="form-check-input info" name="jupiter-compare" id="heavy" value="heavy" v-model="mass" />
+            <label for="heavy" class="form-check-label">Mass larger than Jupiter</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" class="form-check-input info" name="jupiter-compare" id="light" value="light" v-model="mass" />
+            <label for="light" class="form-check-label">Mass less than Jupiter</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" class="form-check-input info" name="jupiter-compare" id="all" value="all" v-model="mass" />
+            <label for="all" class="form-check-label">All masses</label>
+          </div>
+        </div>
 
-    <div>
-      <label for="one-planet">Select one Planet by name</label>
-      <select name="one-planet" id="one-planet" v-model="oneTarget">
-        <option value="all" selected>All Planets</option>
-        <option v-for="planet in this.planets" :value="planet.name">{{ planet.name }}</option>
-      </select>
-    </div>
+        <div>
+          <label for="one-planet">Select one Planet by name</label>
+          <select name="one-planet" id="one-planet" v-model="oneTarget">
+            <option value="all" selected>All Planets</option>
+            <option v-for="planet in this.planets" :value="planet.name">{{ planet.name }}</option>
+          </select>
+        </div>
 
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label for="sort">Sorting by name: </label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label for="sort">Sorting by name: </label>
+          </div>
+          <select class="custom-select" name="sort" id="sort" v-model="sorting">
+            <option value="unsort" selected>Unsort</option>
+            <option value="asec">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+        </div>
       </div>
-      <select class="custom-select" name="sort" id="sort" v-model="sorting">
-        <option value="unsort" selected>Unsort</option>
-        <option value="asec">Ascending</option>
-        <option value="desc">Descending</option>
-      </select>
-    </div>
-  </div>
-  <div class="d-flex justify-content-center">
-    <Counter :showing=this.filteredPlanets.length :total=this.planets.length />
-  </div>
+      <div class="col-lg-10">
+        <div class="d-flex justify-content-center">
+          <Counter :showing=this.filteredPlanets.length :total=this.planets.length />
+        </div>
 
-  <div class="container-xl text-center">
-    <div class="row justify-content-center gy-3">
-      <div v-for="planet in this.filteredPlanets" class="col justify-content-center col-xl-4 col-lg-6 col-sm-12">
-        <div class="card mx-auto shadow" style="width: 22rem;">
-          <h4 class="card-header"><strong class="text-warning">{{ planet.name[0] }}</strong>{{ planet.name.slice(1) }}</h4>
-          <img src="https://picsum.photos/150/150" alt="" class="card-img-top">
-          <h5 class="card-title"><span class="text-success">I</span>nfo</h5>
-          <p class="card-text">
-            <span class="text-danger">W</span>eight ratio to Jupiter : {{ planet.mass }} <br />
-            <span class="text-danger">T</span>emperature : {{ planet.temperature }} <br />
-            <span class="text-danger">D</span>istance from Earth (in light year) :<br /> {{ planet.distance_light_year }} <br />
-            <span class="text-danger">H</span>ost Start Temperature : {{ planet.host_star_temperature }}
-          </p>
+        <div class="container-xl text-center">
+          <div class="row justify-content-center gy-3">
+            <div v-for="planet in this.filteredPlanets" class="col justify-content-center col-xl-4 col-lg-6 col-sm-12">
+              <div class="card mx-auto shadow" style="width: 16rem;">
+                <h4 class="card-header"><strong class="text-warning">{{ planet.name[0] }}</strong>{{ planet.name.slice(1) }}</h4>
+                <img src="https://picsum.photos/150/150" alt="" class="card-img-top">
+                <h5 class="card-title"><span class="text-success">I</span>nfo</h5>
+                <hr style="width:80%;color:green;justify-self: center;align-self: center;"/>
+                <p class="card-text">
+                  <span class="text-danger">W</span>eight ratio to Jupiter : {{ planet.mass }} <br />
+                  <span class="text-danger">T</span>emperature : {{ planet.temperature }} <br />
+                  <span class="text-danger">D</span>istance from Earth (in light year) :<br /> {{ planet.distance_light_year }} <br />
+                  <span class="text-danger">H</span>ost Start Temperature : {{ planet.host_star_temperature }}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  
+  
 </template>
