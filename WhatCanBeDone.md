@@ -3,7 +3,7 @@
 Start time:  
 End time:  
 
-## What could have been done:
+## What could have been done
 
 ### TypeScript
 
@@ -13,6 +13,6 @@ TypeScript helps detect some type errors before testing.
 
 Can write more tests if more time for studying Vue and actual coding.  
 
-### Layout change
+### Component structure change
 
-Put selectors on the side
+Each Planet card can be refactored into its own component.

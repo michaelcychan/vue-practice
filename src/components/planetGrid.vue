@@ -14,21 +14,9 @@
     },
     data() {
       return {
-        mustHaveTemp: false,
-        mass: "all",
-        oneTarget: "all",
-        sorting: "unsort",
         filteredPlanets: []
       }
     },
-    methods: {
-      toggleMustHaveTemp() {
-        this.mustHaveTemp = !this.mustHaveTemp
-      },
-      toggleHeavy() {
-        this.heavy = !this.heavy
-      }
-    }
   }
 </script>
 
@@ -42,13 +30,12 @@
         <div class="d-flex justify-content-center">
           <Counter :showing=this.filteredPlanets.length :total=this.planets.length />
         </div>
-
         <div class="container-xl text-center">
           <div class="row justify-content-center gy-3">
             <div v-for="planet in this.filteredPlanets" class="col justify-content-center col-xl-4 col-lg-6 col-sm-12">
               <div class="card mx-auto shadow" style="width: 16rem;">
                 <h4 class="card-header"><strong class="text-warning">{{ planet.name[0] }}</strong>{{ planet.name.slice(1) }}</h4>
-                <img src="https://picsum.photos/150/150" alt="" class="card-img-top">
+                <img src="https://picsum.photos/150/150" alt="mock image" class="card-img-top">
                 <h5 class="card-title"><span class="text-success">I</span>nfo</h5>
                 <hr style="width:80%;color:green;justify-self: center;align-self: center;"/>
                 <p class="card-text">
