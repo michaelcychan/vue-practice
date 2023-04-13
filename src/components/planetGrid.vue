@@ -1,4 +1,5 @@
 <script>
+  import Counter from './Counter.vue'
   export default {
     props: {
       planets: {
@@ -6,12 +7,16 @@
         required: true
       }
     },
+    components: {
+      Counter
+    },
     data() {
       return {
         mustHaveTemp: false,
         mass: "all",
         oneTarget: "all",
-        sorting: "unsort"
+        sorting: "unsort",
+        planetNumber: 4
       }
     },
     methods: {
@@ -99,6 +104,9 @@
         <option value="desc">Descending</option>
       </select>
     </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <Counter :showing=this.filteredPlanets.length :total=this.planets.length />
   </div>
 
   <div class="container-xl text-center">

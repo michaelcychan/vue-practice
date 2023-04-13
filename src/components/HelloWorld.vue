@@ -64,7 +64,7 @@
 <template>
   <div class="container-lg greetings">
     <h1>{{ heading }}</h1>
-    <h2 class="green">{{ msg }}</h2>
+    <h2 class="text-success">{{ msg }}</h2>
   </div>
   <div class="d-flex">
     <button v-on:click="getDataForArray" class="btn btn-primary mx-auto">Solar System Planets</button>
